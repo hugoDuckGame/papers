@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noticia+Text:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noticia+Text:ital,wght@0,400;0,700;1,400;1,700&family=Yusei+Magic&display=swap" rel="stylesheet">
   <?php header('Content-Type: text/html; charset=UTF-8'); ?>
-  <title>Le Hugotidien</title>
+  <title>Le Robineur</title>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="../static/htn.css">
+  <link rel="stylesheet" href="../static/rbn.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -26,7 +26,7 @@
 include "../../vars.php";
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, 'htd');
+$conn = new mysqli($servername, $username, $password, 'rbn');
 
 // Check connection
 if ($conn->connect_error) {
@@ -46,7 +46,7 @@ $conn->set_charset("utf8mb4");
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#">Le Hugotidien</a>
+      <a class="navbar-brand" href="#">Le Robineur</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
@@ -64,7 +64,7 @@ $conn->set_charset("utf8mb4");
         </div>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="../../robineur/server/index.php"><span class="glyphicon glyphicon-arrow-right"></span> Le Robineur</a></li>
+        <li><a href="../../hugotidien/server/index.php"><span class="glyphicon glyphicon-arrow-right"></span> Le Hugotidien</a></li>
         <li><a href="#"><span class="glyphicon glyphicon-user"></span>Mon abonnement</a></li>
       </ul>
     </div>
@@ -130,7 +130,7 @@ $conn->set_charset("utf8mb4");
 </div>
 
 <footer class="container-fluid text-center ">
-  <p>&copy Le Hugotidien <?php echo date("Y"); ?></p>
+  <p>&copy Le Robineur <?php echo date("Y"); ?></p>
 </footer>
 <?php $conn->close(); ?>
 </body>

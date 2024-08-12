@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Le Hugotidien</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noticia+Text:ital,wght@0,400;0,700;1,400;1,700&family=Yusei+Magic&display=swap" rel="stylesheet">
+  <title>Le Robineur</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../static/htn.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/rbn.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <style>    
@@ -17,6 +20,21 @@
     }
   </style>
 </head>
+
+<?php 
+include "../../vars.php";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, 'rbn');
+
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+$conn->set_charset("utf8mb4");
+?>
+
 <body>
 
 <nav class="navbar navbar-inverse">
@@ -27,11 +45,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#">Le Hugotidien</a>
+      <a class="navbar-brand" href="#">Le Robineur</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Accueil</a></li>
+        <li class=""><a href="index.php">Accueil</a></li>
+        <li class=""><a href="newArt.php">Nouvel Article</a></li>
+        <li class="active"><a href="#">Article</a></li>
       </ul>
       <form class="navbar-form navbar-right" role="search">
         <div class="form-group input-group">
@@ -44,6 +64,7 @@
         </div>
       </form>
       <ul class="nav navbar-nav navbar-right">
+        <li><a href="../../hugotidien/server/index.php"><span class="glyphicon glyphicon-arrow-right"></span> Le Hugotidien</a></li>
         <li><a href="#"><span class="glyphicon glyphicon-user"></span>Mon abonnement</a></li>
       </ul>
     </div>
@@ -64,7 +85,26 @@
       </div>
     </div>
     <div class="col-sm-7">
-      
+        <div class="card">
+            <?php 
+            $sql = "SELECT * FROM `articles` WHERE `unicid` = {$_GET['n']}";
+            $result = $conn->query($sql);
+            
+            if ($result->num_rows > 0) {
+              // output data of each row
+              while($row = $result->fetch_assoc()) {
+                if($row['img'] != '') {echo "<img src='../artImages/{$row['img']}' class='card-img-top' alt='Image de l'article'>";}
+                echo "
+                <div class='card-body'>
+                    <h1 class='card-title'> {$row['title']}</h1>
+                    <h4 class='card-subtitle mb-2 text-muted'>{$row['date']}</h4>
+                    <p class='card-text'>
+                        {$row['content']}
+                    </p>
+                    <h4 class='card-subtitle mb-2 text-muted'>{$row['author']}</h4>
+                </div>";}
+               } ?>
+        </div>
       <?php //INSERT ARTICLE THUMBS HERE ?>
     </div>
     <div class="col-sm-2 well">     
@@ -73,9 +113,10 @@
   </div>
 </div>
 
-<footer class="container-fluid text-center">
-  <p>Footer Text</p>
+<footer class="container-fluid text-center ">
+    <p>&copy Le Robineur <?php echo date("Y"); ?></p>
 </footer>
 
 </body>
+<?php $conn->close(); ?>
 </html>
