@@ -89,7 +89,7 @@ $conn->set_charset("utf8mb4");
         <div class="col-sm-12">
         <div class="panel panel-default text-left">
             <div class="panel-body">
-            <p contenteditable="true"></p>   
+              <p> Articles Récents </p>            
             </div>
         </div>
         </div>
