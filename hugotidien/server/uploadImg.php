@@ -2,7 +2,7 @@
 include "../../vars.php";
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, 'htd');
+$conn = new mysqli($servername, $username, $password, 'papers');
 
 // Check connection
 if ($conn->connect_error) {
@@ -11,7 +11,7 @@ if ($conn->connect_error) {
 
 $sql = $sql = "SELECT AUTO_INCREMENT
         FROM information_schema.TABLES
-        WHERE TABLE_SCHEMA = 'htd'
+        WHERE TABLE_SCHEMA = 'papers'
           AND TABLE_NAME = 'articles'";
 $result = $conn->query($sql);
 

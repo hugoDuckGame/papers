@@ -2,7 +2,7 @@
 include "../../vars.php";
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, 'rbn');
+$conn = new mysqli($servername, $username, $password, 'papers');
 
 // Check connection
 if ($conn->connect_error) {
@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 $conn->set_charset("utf8mb4");
 
 
-$sql = "INSERT INTO `articles`(`title`, `content`, `img`, `author`) VALUES ('{$_GET['title']}', '{$_GET['content']}', '{$_GET['hidName']}', '{$_GET['author']}')";
+$sql = "INSERT INTO `articles`(`title`, `content`, `img`, `author`, `paperId`) VALUES ('{$_GET['title']}', '{$_GET['content']}', '{$_GET['hidName']}', '{$_GET['author']}', 'rbn')";
 
 if ($conn->query($sql) === TRUE) {
   echo "New record created successfully";

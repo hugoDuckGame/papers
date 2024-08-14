@@ -1,3 +1,5 @@
+<?php 
+session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +27,7 @@
 include "../../vars.php";
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, 'htd');
+$conn = new mysqli($servername, $username, $password, 'papers');
 
 // Check connection
 if ($conn->connect_error) {
@@ -75,7 +77,7 @@ $conn->set_charset("utf8mb4");
   <div class="row">
     <div class="col-sm-3 well">
       <div class="well">
-        <?php //LIEN PROFIL et IMAGE PROFIL ICI ?>
+        <?php if(isset($_SESSION['id'])) {echo $_SESSION['fName'] . "  " . $_SESSION['lName'];} ?>
       </div>
       <div class="well">
         <p><a href="#">Catégories</a></p>
@@ -108,7 +110,22 @@ $conn->set_charset("utf8mb4");
       <?php //INSERT ARTICLE THUMBS HERE ?>
     </div>
     <div class="col-sm-2 well">     
-        <?php //inserer PUBS ici ?>
+        <p>Liens Partenaires </p>
+          <br> 
+          <?php 
+          $sql = "SELECT * FROM `ads` WHERE paperId='htd'";
+              $result = $conn->query($sql);
+              if ($result->num_rows > 0) {
+              // output data of each row
+              while($row = $result->fetch_assoc()) {
+                  if($row['paperId'] == 'rbn') {$pid = 'robineur';} else if($row['paperId'] == 'htd') {$pid = 'hugotidien';}
+                  echo "<a href='../artImages/{$row['img']}'><div class='well row'>
+                          <img src='../artImages/{$row['img']}' class='row' width='180'>
+                          <p>{$row['legend']}</p>
+                          <p>{$row['company']}</p>
+                        </div></a>";
+                  }
+              }?>
     </div>
   </div>
 </div>
