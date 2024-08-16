@@ -11,7 +11,7 @@ if ($conn->connect_error) {
 
 $sql = $sql = "SELECT AUTO_INCREMENT
         FROM information_schema.TABLES
-        WHERE TABLE_SCHEMA = 'papers'
+        WHERE TABLE_SCHEMA = '{$dbname}'
           AND TABLE_NAME = 'articles'";
 $result = $conn->query($sql);
 
