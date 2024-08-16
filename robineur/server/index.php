@@ -28,7 +28,7 @@ session_start();?>
 include "../../vars.php";
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, 'papers');
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
